@@ -14,17 +14,6 @@ void Dealer::init_hand(cards::Card& c1, cards::Card& c2) {
     hand_.init_hand(c1, c2);
 }
 
-/* int Dealer::turn(cards::Deck& game_deck) {
-    std::cout << "The value of the dealer's hand is " << hand_.value() << '\n';
-    if (hand_.value() > 17)
-        return hand_.value();
-    
-    std::cout << "Dealer must hit...\n";
-    std::cout << "Dealer draws ";
-    hand_.hit(game_deck.draw());
-    return turn(game_deck);
-} */
-
 void Dealer::read_hand() const {
     hand_.dealer_visible_card().print_card();
     std::cout << "{hidden}";

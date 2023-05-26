@@ -13,7 +13,6 @@ class Hand {
 public:
     Hand();
     Hand(Card& c1, Card& c2);
-    // Hand(Deck& deck);
 
     void init_hand(Card& c1, Card& c2);
     void hit(Card& card);

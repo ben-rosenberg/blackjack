@@ -26,24 +26,6 @@ private:
     cards::Deck deck_;
 };
 
-/* class Game {
-public:
-    Game(std::string player_name);
-    void start_play();
-    void init_round();
-    void deal_cards();
-
-    void play();
-
-    void end_round();
-
-private:
-    player::Player player_;
-    player::Dealer dealer_;
-    cards::Deck deck_;
-    int round_bet_;
-}; */
-
 } // namespace gameplay
 } // namespace blackjack
 

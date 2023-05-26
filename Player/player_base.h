@@ -18,7 +18,6 @@ public:
 
     virtual void init_hand(cards::Card& c1, cards::Card& c2);
     void hit(cards::Card& card);
-    // virtual int turn(cards::Deck& game_deck) = 0;
     virtual void read_hand() const;
     int hand_value() const;
 

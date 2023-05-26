@@ -10,13 +10,6 @@ Hand::Hand(Card& c1, Card& c2)
     card_count_(2),
     value_(c1.get_value() + c2.get_value()) {}
 
-// I think I want the GAME to maintain ownership of the deck.
-// The game passes cards to dealer and player, rather than the latter two
-// holding a reference to the deck.
-/* Hand::Hand(Deck& deck) : cards_{deck.draw(), deck.draw()}, card_count_(2) {
-    value_ = cards_[0].get_value() + cards_[1].get_value();
-} */
-
 void Hand::hit(Card& card) {
     cards_.push_back(card);
     value_ += card.get_value();
