@@ -22,7 +22,7 @@ void PlayerBase::hit(cards::Card& card) {
     std::cout << '\n' << name_ << " draws ";
     card.print_card();
     hand_.hit(card);
-    std::cout << "Hand value: " << hand_.value();
+    std::cout << name_ << "'s hand value: " << hand_.value();
 }
 
 void PlayerBase::read_hand() const {

@@ -20,6 +20,7 @@ public:
     int player_action();
     int dealer_action();
     bool query_new_game();
+    void end_game() const;
 private:
     player::Player player_;
     player::Dealer dealer_;

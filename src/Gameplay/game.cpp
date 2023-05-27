@@ -1,7 +1,11 @@
 #include "game.h"
 
-#include <iostream>
-#include <string>
+#include <chrono> // std::chrono::milliseconds()
+#include <iostream> // std::cout
+#include <string> // std::string
+#include <thread> // std::this_thread::sleep_for()
+
+#define SLEEP_DURATION 500
 
 namespace blackjack {
 namespace gameplay {
@@ -32,38 +36,10 @@ bool Game::play() {
     }
 }
 
-int Game::player_action() {
-    std::cout << '\n' << player_.name() << "'s hand value is " << player_.hand_value();
-    std::cout << "\nWould you like to hit (h) or stand (s)? ";
-    char response;
-    std::cin >> response;
-
-    while (player_.hand_value() <= 21 && (response == 'h' || response == 'H')) {
-        player_.hit(deck_.draw());
-        std::cout << '\n' << player_.name() << "'s hand value is " << player_.hand_value();
-        std::cout << "\nWould you like to hit (h) or stand (s)? ";
-        response;
-        std::cin >> response;
-    }
-
-    return player_.hand_value();
-}
-
-int Game::dealer_action() {
-    dealer_.reveal_hand();
-    std::cout << "\nDealer's hand value is " << dealer_.hand_value();
-
-    while (dealer_.hand_value() < 17) {
-        dealer_.hit(deck_.draw());
-    }
-
-    return dealer_.hand_value();
-}
-
 int Game::query_bet() {
     int bet;
 
-    std::cout << "\nBank: " << player_.money();
+    std::cout << "\nBank: $" << player_.money();
     std::cout << "\nPlace your bet to begin a round: ";
     std::cin >> bet;
 
@@ -85,8 +61,41 @@ int Game::query_bet() {
 }
 
 void Game::init_hands() {
+    std::cout << "\nDealing cards...\n";
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_DURATION));
     player_.init_hand(deck_.draw(), deck_.draw());
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_DURATION));
     dealer_.init_hand(deck_.draw(), deck_.draw());
+}
+
+int Game::player_action() {
+    std::cout << '\n' << player_.name() << "'s hand value is " << player_.hand_value();
+    std::cout << "\n\nWould you like to hit (h) or stand (s)? ";
+    char response;
+    std::cin >> response;
+
+    while (player_.hand_value() <= 21 && (response == 'h' || response == 'H')) {
+        player_.hit(deck_.draw());
+        std::cout << '\n' << player_.name() << "'s hand value is " << player_.hand_value();
+        std::cout << "\nWould you like to hit (h) or stand (s)? ";
+        response;
+        std::cin >> response;
+    }
+
+    return player_.hand_value();
+}
+
+int Game::dealer_action() {
+    dealer_.reveal_hand();
+    std::cout << "\n\nDealer's hand value is " << dealer_.hand_value();
+
+    while (dealer_.hand_value() < 17) {
+        dealer_.hit(deck_.draw());
+    }
+
+    return dealer_.hand_value();
 }
 
 bool Game::query_new_game() {
@@ -98,6 +107,11 @@ bool Game::query_new_game() {
     std::cin >> response;
 
     return response != 'q' && response != 'Q';
+}
+
+void Game::end_game() const {
+    std::cout << "\nENDING GAME...";
+    std::cout << '\n' << player_.name() << "'s final bank: $" << player_.money();
 }
 
 } // namespace gameplay
