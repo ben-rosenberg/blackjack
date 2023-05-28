@@ -26,11 +26,11 @@ bool Game::play() {
     int dealer_final_hand_value = dealer_action();
 
     if (player_final_hand_value > dealer_final_hand_value || dealer_final_hand_value > 21) {
-        std::cout << "\nYou win this round!";
+        std::cout << "\n\nYou win this round!";
         player_.transact_money(bet);
         return query_new_game();
     } else {
-        std::cout << "\nYou lose this round.";
+        std::cout << "\n\nYou lose this round.";
         player_.transact_money(bet * -1);
         return query_new_game();
     }
